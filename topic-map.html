@@ -7,7 +7,7 @@
 <meta name="description" content="Interactive map of the topics of the module and how they connect.">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" media="print" onload="this.media='all'" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
 <link rel="stylesheet" href="assets/site.css">
 <style>
 /* Layout: a fixed grid, one column per session, topics in teaching order; a study panel
@@ -48,18 +48,16 @@ select { font: inherit; font-size: 14px; color: var(--ink); background: var(--su
 .key { width: 22px; height: 0; border-top: 2px solid var(--ink) }
 .key.out { border-top-style: dashed; opacity: .8 }
 
-.layout { display: grid; grid-template-columns: minmax(0, 1fr) 360px; gap: 20px; align-items: start }
-@media (max-width: 1280px) { .layout { grid-template-columns: minmax(0, 1fr) } }
+.layout { display: grid; grid-template-columns: minmax(0, 1fr); gap: 28px }
 
 .mapbox { position: relative; min-width: 0 }
-.grid { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); gap: 10px; z-index: 1 }
-@media (max-width: 960px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); row-gap: 22px } }
+.grid { position: relative; display: grid; grid-template-columns: repeat(8, minmax(0, 1fr)); column-gap: clamp(16px, 2.6vw, 44px); row-gap: 10px; z-index: 1 }
+@media (max-width: 960px) { .grid { grid-template-columns: repeat(4, minmax(0, 1fr)); column-gap: 12px; row-gap: 22px } }
 @media (max-width: 560px) { .grid { grid-template-columns: repeat(2, minmax(0, 1fr)) } }
 svg.links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-events: none; z-index: 2; overflow: visible }
 @media (max-width: 960px) { svg.links { display: none } }
-.back { display: none; font-size: 14px; margin-top: 14px }
+.back { font-size: 14px; margin-top: 14px }
 .back a { color: var(--focus) }
-@media (max-width: 1280px) { .back { display: block } }
 
 .col { display: flex; flex-direction: column; gap: 7px; min-width: 0 }
 .colhead { border-bottom: 2px solid var(--sc); padding-bottom: 5px; margin-bottom: 2px; min-height: 60px }
@@ -85,9 +83,12 @@ svg.links { position: absolute; inset: 0; width: 100%; height: 100%; pointer-eve
 .badge.b-pre { color: var(--ink) }
 .badge.b-next { color: var(--muted) }
 
-aside.panel { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 12px); background: var(--surface); border: 1px solid var(--line);
-  border-radius: 8px; padding: 16px 16px 18px; max-height: calc(100vh - 24px); overflow: auto; min-width: 0 }
-@media (max-width: 1280px) { aside.panel { position: static; max-height: none } }
+aside.panel { background: var(--surface); border: 1px solid var(--line); border-top: 3px solid var(--pc, var(--line));
+  border-radius: 8px; padding: 16px 20px 18px; min-width: 0; scroll-margin-top: 12px }
+.pgrid { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr) minmax(0, 1.1fr); gap: 4px 36px }
+@media (max-width: 1100px) { .pgrid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) } .pgrid > :first-child { grid-column: 1 / -1 } }
+@media (max-width: 680px) { .pgrid { grid-template-columns: minmax(0, 1fr) } }
+.pgrid > div > h3:first-child { margin-top: 8px }
 .ptop { display: flex; gap: 10px; align-items: baseline; flex-wrap: wrap }
 .pcode { font-family: var(--f-code); font-weight: 600; font-size: 14px; color: var(--pc); border: 1.5px solid var(--pc); background: var(--pt); border-radius: 4px; padding: 0 6px }
 .psess { font-size: 13px; color: var(--muted) }
@@ -125,8 +126,8 @@ main.wrap { max-width: 1560px } .bar .in { max-width: 1560px } footer.site { max
 <main class="wrap">
   <div class="maphead">
     <h1>Topic map</h1>
-    <p class="lede">Each column is a session, with its topics in the order they are taught. Select a topic to see
-      what it builds on, where to find it in the slides and in Lay, and the full list of topics to study before it.</p>
+    <p class="lede">Each column is a session, with its topics in the order they are taught. Select a topic: the lines show what it
+      builds on and what it leads to, and the summary below the map gives the slides, the section of Lay and the topics to study first.</p>
     <div class="controls">
       <label for="jump">Topic <select id="jump"></select></label>
       <div class="legend" aria-hidden="true">
@@ -213,7 +214,7 @@ function path(from, to, dashed, color) {
   }
   const p = document.createElementNS(NS, 'path');
   p.setAttribute('d', d); p.setAttribute('fill', 'none'); p.setAttribute('stroke', color);
-  p.setAttribute('stroke-width', dashed ? '1.4' : '1.8'); p.setAttribute('marker-end', dashed ? 'url(#ah-n)' : 'url(#ah-p)');
+  p.setAttribute('stroke-width', dashed ? '1.6' : '2.2'); p.setAttribute('marker-end', dashed ? 'url(#ah-n)' : 'url(#ah-p)');
   if (dashed) { p.setAttribute('stroke-dasharray', '5 4'); p.setAttribute('opacity', '0.75'); }
   svg.appendChild(p);
 }
@@ -244,16 +245,20 @@ function renderPanel(t) {
     study += `<li><span class="sc" style="--sc:${sc(u.s)}">${u.code}</span>` +
       `<button type="button" data-code="${u.code}" class="${direct.has(a) ? 'direct' : ''}">${u.name}<small>Lay ${u.lay}${u.practise ? ' &middot; ' + u.practise : ''}</small></button></li>`; });
   panel.innerHTML = `
+    <div class="pgrid"><div>
     <div class="ptop"><span class="pcode">${t.code}</span><span class="psess">Session ${t.s}: ${DATA.sessions[t.s].title}</span></div>
     <h2>${t.name}</h2>
     <p>${t.do}</p>
     <dl class="pfacts"><dt>Lay</dt><dd>Section ${t.lay}</dd>${t.practise ? `<dt>Practise</dt><dd>${t.practise}</dd>` : ''}</dl>
     <h3>Slides</h3>${slides}
+    </div><div>
     <h3>Builds on directly</h3>${pre[t.id].length ? `<div class="chips">${pre[t.id].map(chip).join('')}</div>` : `<p class="none">Nothing earlier: this is a starting point.</p>`}
     <h3>Leads to</h3>${nxt[t.id].length ? `<div class="chips">${nxt[t.id].map(chip).join('')}</div>` : `<p class="none">Nothing later in the module.</p>`}
+    </div><div>
     <h3>To study first</h3>
     ${anc.length ? `<p class="count">${anc.length} topic${anc.length > 1 ? 's' : ''} in teaching order; the ones in bold are used directly.</p><ol class="study">${study}</ol>`
                  : `<p class="none">None. Start here.</p>`}
+    </div></div>
     <p class="back"><a href="#${t.code}" data-back="1">Back to the map</a></p>`;
   const back = panel.querySelector('[data-back]');
   if (back) back.addEventListener('click', e => { e.preventDefault(); boxes[t.id].scrollIntoView({ block: 'center', behavior: calm() }); boxes[t.id].focus({ preventScroll: true }); });
@@ -263,7 +268,7 @@ function renderPanel(t) {
 }
 
 const calm = () => (matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth');
-const stacked = () => matchMedia('(max-width: 1280px)').matches;
+const stacked = () => matchMedia('(max-width: 960px)').matches;
 function select(code, push) {
   const t = byCode[code]; if (!t) return;
   current = t;
