@@ -290,5 +290,32 @@ select(byCode[location.hash.slice(1)] ? location.hash.slice(1) : '5c', false);
 if (document.fonts && document.fonts.ready) document.fonts.ready.then(drawLines);
 </script>
 <footer class="site">Mathematics for Engineering II · Dyson School of Design Engineering, Imperial College London · Module leader: Dr Pietro Ferraro. Slides and exercise sheets are on Canvas.</footer>
+<script type="speculationrules">{"prefetch":[{"where":{"href_matches":"*.html"},"eagerness":"moderate"},{"where":{"href_matches":"./"},"eagerness":"moderate"}]}</script>
+<script>
+/* Loads the other pages of the site in the background, so a click does not wait on the GitHub Pages cache.
+   All pages after the page has loaded; again on hover or touch if the copy is more than five minutes old. */
+(function () {
+  var seen = {};
+  function warm(u) {
+    var t = Date.now();
+    if (seen[u] && t - seen[u] < 300000) return;
+    seen[u] = t;
+    try { fetch(u, { credentials: 'same-origin' }).catch(function () {}); } catch (e) {}
+  }
+  var here = location.pathname.replace(/index\.html$/, '');
+  var links = [].slice.call(document.querySelectorAll('a[href]')).filter(function (a) {
+    return a.origin === location.origin && /(\.html|\/)$/.test(a.pathname) && a.pathname.replace(/index\.html$/, '') !== here;
+  });
+  function all() { links.forEach(function (a) { warm(a.href.split('#')[0]); }); }
+  window.addEventListener('load', function () {
+    if ('requestIdleCallback' in window) requestIdleCallback(all, { timeout: 2000 }); else setTimeout(all, 300);
+  });
+  links.forEach(function (a) {
+    var u = a.href.split('#')[0], go = function () { warm(u); };
+    a.addEventListener('pointerenter', go); a.addEventListener('focus', go);
+    a.addEventListener('touchstart', go, { passive: true });
+  });
+})();
+</script>
 </body>
 </html>
