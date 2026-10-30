@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en-GB">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Module handbook · Mathematics for Engineering II</title>
+<meta name="description" content="Module handbook for Mathematics for Engineering II.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=IBM+Plex+Mono:wght@500;600&family=Source+Serif+4:opsz,wght@8..60,600;8..60,700&display=swap">
+<link rel="stylesheet" href="assets/site.css">
+
+</head>
+<body>
+<header class="bar"><div class="in"><a class="brand" href="./">Mathematics for Engineering II</a><nav aria-label="Site"><a href="./">Home</a><a href="handbook.html" aria-current="page">Handbook</a><a href="sessions.html">Sessions</a><a href="topic-map.html">Topic map</a><a href="videos.html">Videos</a><a href="assessment.html">Assessment</a></nav></div></header>
+<main><div class="prose">
+<div class="eyebrow">Module handbook · 2026–27</div>
+<h1>Handbook</h1>
+<nav class="toc" aria-label="Handbook sections">
+  <a href="#overview">1. Overview</a><a href="#prerequisites">2. Prerequisites</a><a href="#team">3. Teaching team</a>
+  <a href="#outcomes">4. Learning outcomes</a><a href="#syllabus">5. Syllabus</a><a href="#teaching">6. Teaching arrangements</a>
+  <a href="#assessment">7. Assessment</a><a href="#reading">8. Reading and materials</a><a href="#contact">9. Contact and feedback</a>
+</nav>
+
+<section id="overview">
+<h2>1. Overview</h2>
+<p>Most of the quantitative models you will build in the rest of this degree are linear or at least they can be linearised: a finite element mesh, a sensor array, a regression fitted to measured data, a network of flows between nodes. In each case the object being manipulated is the same, namely a matrix acting on a vector, and the questions being asked of it are: does a solution exist, is it unique, and what happens if the map is applied again and again. The aim of this module is to make you proficient in answering these three questions.</p>
+<p>In DE1 Engineering Mathematics you met matrices geometrically: as objects that stretch, rotate and shear a square, with a determinant representing by how much the area changed in the process. While we will maintain the intuition behind it, this approach assumes that you can draw the picture, and almost nothing you will actually model can be represented in two or three dimensions. The aim of this module is therefore to restate that geometric material in terms that do not depend on being able to draw it, and then to extend it to results for the <i>n</i>-dimensional case.</p>
+<p>The material is presented geometrically first and formally second, in the sense that a concept is illustrated in two or three dimensions, where that is possible, before it is defined in general. We shall be rigorous in the way we treat each topic, but the intuition is given before the algebra, since each definition was introduced historically in response to a specific problem and is easier to retain when that problem is stated first.</p>
+<p>It is worth mentioning one of the indirect aims of the module: to make you reason in a formal and precise way. The module might feel a bit dry at times, and we will try our best to give you reasons for what you are studying and learning. However, part of the module will require you to sit down and understand the maths and the formalism for the sake of it. This is intended. We want to refine your ability to think in an abstract way, and we strongly believe that some soul-crushing mathematics is the best way to do so. Please do not be discouraged if it is hard at first. John von Neumann, one of the great mathematicians of the twentieth century, is reported to have told a student: “In mathematics you don’t understand things. You just get used to them.”</p>
+<p>The remainder of this handbook is organised as follows. Section 2 sets out the prerequisites for the course. Section 3 introduces the teaching team and Section 4 the learning outcomes. Section 5 gives the syllabus session by session, together with the corresponding textbook sections; Section 6 describes how a normal teaching week runs, and Section 7 the assessment. Sections 8 and 9 cover reading, materials and how to reach us.</p>
+</section>
+
+<section id="prerequisites">
+<h2>2. Prerequisites</h2>
+<p>The formal prerequisite is <b>DE1 Engineering Mathematics, Chapters 3 to 5</b>, and I would ask you to re-read them before the second lecture. More specifically, I shall assume that you have met the following:</p>
+<ul>
+  <li>matrices as geometric transformations, together with the associated idea that the columns of a matrix record where the coordinate axes land;</li>
+  <li>the determinant as an area (or, in three dimensions, volume) scaling factor;</li>
+  <li>eigenvalues and eigenvectors, at least for 2×2 matrices; that is, the directions along which a matrix acts by scaling alone;</li>
+  <li>matrix inverses, both by the 2×2 formula and by cofactors;</li>
+  <li>complex numbers, and partial derivatives.</li>
+</ul>
+<p>Note that one thing I do <i>not</i> assume is Gaussian elimination (the systematic procedure for reducing a system of linear equations to one that can be read off), since it is not covered anywhere in year 1. We therefore build it from nothing in Session 1. If it happens to look familiar to you from school, so much the better; I would nonetheless advise strongly against skipping that week, because essentially everything from Session 2 onwards is an application of it.</p>
+<p>Finally, a word on scope. This is a course in linear algebra with a short excursion into stochastic systems at the end; it is not a course in numerical analysis, and it is not a course in probability. We shall meet Markov chains in Session 8, but the treatment is restricted to what follows directly from the linear algebra that precedes it. The small amount of probability required is developed from scratch in that session, and no prior exposure is assumed.</p>
+</section>
+
+<section id="team">
+<h2>3. Teaching team</h2>
+<dl class="people">
+  <div><dt>Dr Pietro Ferraro</dt><dd>Module Leader · <span class="addr">p.ferraro@imperial.ac.uk</span></dd></div>
+  <div><dt>Haozhe Tian</dt><dd>Graduate Teaching Assistant</dd></div>
+  <div><dt>Bhattacharya Dipankar</dt><dd>Graduate Teaching Assistant</dd></div>
+</dl>
+<p class="small">The teaching assistants’ email addresses are in the handbook on Canvas.</p>
+</section>
+
+<section id="outcomes">
+<h2>4. Learning outcomes</h2>
+<p><i>On successful completion of this module, you will be able to:</i></p>
+<ul>
+  <li>recognise when an engineering problem reduces to a linear system, and express it as a matrix equation;</li>
+  <li>solve such a system by Gaussian elimination, and determine whether a solution exists at all and, if so, whether it is unique;</li>
+  <li>work confidently with span, linear independence, basis and dimension, and compute the rank, image and kernel of a matrix, so characterising the set of vectors a given map can produce and the set it maps to zero;</li>
+  <li>fit a model to data by least squares, and explain the procedure as an orthogonal projection onto the column space;</li>
+  <li>compute and interpret eigenvalues and eigenvectors in <i>n</i> dimensions, diagonalise a matrix, and use the result to predict the long-run behaviour, and the stability, of a discrete-time linear system;</li>
+  <li>analyse symmetric matrices and quadratic forms, and classify a quadratic form from the eigenvalues of its matrix;</li>
+  <li>model a system as a Markov chain and determine its stationary distribution.</li>
+</ul>
+</section>
+
+<section id="syllabus">
+<h2>5. Syllabus</h2>
+<p>The module runs as eight two-hour lecture sessions. Sessions 1 to 3 establish the definitions and the solution algorithm on which the remainder depends; Sessions 4 to 6 apply these to the two cases that occur most frequently in practice, namely fitting a model to data and iterating a map; Sessions 7 and 8 treat two structured classes of matrices, symmetric and stochastic, for which stronger results are available. The right-hand column gives the corresponding sections of the textbook; see Section 8.</p>
+<div class="tablewrap"><table><thead><tr><th>Session</th><th>Topic</th><th>Lay</th></tr></thead><tbody><tr style="--sc: var(--s1)"><td class="num">1</td><td><b>Linear equations in linear algebra</b><br><span class="small">Three engineering problems that lead to a matrix equation. Systems of linear equations, row reduction and echelon forms, pivots, existence and uniqueness. Linear combinations and span. The matrix equation <i>Ax</i> = <i>b</i> and its solution sets. Linear independence.</span></td><td class="lay">1.1 to 1.7</td></tr><tr style="--sc: var(--s2)"><td class="num">2</td><td><b>Linear transformations, matrix algebra and determinants</b><br><span class="small">Linear transformations and their standard matrix. Matrix operations, the inverse of a matrix and the Invertible Matrix Theorem. Determinants: cofactor expansion, computation by Gaussian elimination, area and volume.</span></td><td class="lay">1.8, 1.9, 2.1 to 2.3, 3.1 to 3.3</td></tr><tr style="--sc: var(--s3)"><td class="num">3</td><td><b>Vector spaces, rank, image and kernel</b><br><span class="small">Vector spaces and subspaces. The column space (the set of attainable outputs) and the null space (the set of inputs mapped to zero). Basis, coordinates and dimension. Rank and the Rank Theorem.</span></td><td class="lay">2.8, 2.9, 4.1 to 4.6</td></tr><tr style="--sc: var(--s4)"><td class="num">4</td><td><b>Orthogonality and least squares</b><br><span class="small">Inner product, length and orthogonality. Orthogonal sets and orthogonal projection. Least-squares problems and the normal equations: the treatment of systems that admit no exact solution. Least-squares lines and linear models.</span></td><td class="lay">6.1 to 6.3, 6.5, 6.6</td></tr><tr style="--sc: var(--s5)"><td class="num">5</td><td><b>Eigenvalues, eigenvectors and diagonalisation</b><br><span class="small">Eigenvalues and eigenvectors in <i>n</i> dimensions. The characteristic equation and similar matrices. Diagonalisation: a basis in which the matrix becomes diagonal, and the computation of <i>A</i><sup><i>k</i></sup>.</span></td><td class="lay">5.1 to 5.3</td></tr><tr style="--sc: var(--s6)"><td class="num">6</td><td><b>Change of basis, complex eigenvalues and dynamical systems</b><br><span class="small">Change of basis and the matrix of a linear transformation. Complex eigenvalues and what they mean geometrically. Long-run behaviour and stability of discrete dynamical systems.</span></td><td class="lay">4.4, 4.7, 5.4 to 5.6</td></tr><tr style="--sc: var(--s7)"><td class="num">7</td><td><b>Symmetric matrices and quadratic forms</b><br><span class="small">Diagonalisation of symmetric matrices (the spectral theorem). Quadratic forms and their classification.</span></td><td class="lay">7.1, 7.2</td></tr><tr style="--sc: var(--s8)"><td class="num">8</td><td><b>Nonnegative matrices and Markov chains</b><br><span class="small">Stochastic matrices and state transition diagrams. Stationary distributions and the Perron–Frobenius theorem. Example: Monopoly as a Markov chain.</span></td><td class="lay">4.9 and additional material</td></tr></tbody></table></div>
+<p>Since this is the first year the course is run, we might adjust topics slightly during class, so don’t treat this list as set in stone.</p>
+</section>
+
+<section id="teaching">
+<h2>6. Teaching arrangements</h2>
+<p>A normal teaching week has the following shape:</p>
+<div class="tablewrap"><table>
+  <thead><tr><th>Day</th><th>What</th><th>Who</th></tr></thead>
+  <tbody>
+    <tr><td><b>Tuesday</b></td><td>Lecture (2 hours)</td><td>Dr Pietro Ferraro</td></tr>
+    <tr><td><b>Friday</b></td><td>Tutorial (2 hours)</td><td>Haozhe Tian and Bhattacharya Dipankar, half the class each</td></tr>
+  </tbody>
+</table></div>
+<p>The first week is the one exception: there is <b>no tutorial</b>, and the lecture is held on the <b>Friday</b>. From week 2 onwards, the pattern above holds, which gives eight lectures and seven tutorials in total.</p>
+<p>You will be assigned to one of the two Friday halves, and I would ask you to attend the half to which you have been assigned: both cover the same material, and the purpose of splitting the cohort is to keep each tutorial group small, so that there is time for individual questions.</p>
+<p>Each week’s slides and exercise sheet are released together, in advance of the lecture. I would encourage you to attempt the sheet before the tutorial rather than after it: the tutorials are of considerably more use if you arrive already knowing which question you were unable to complete, since the time can then be spent on that question rather than on those that presented no difficulty.</p>
+</section>
+
+<section id="assessment">
+<h2>7. Assessment</h2>
+<p>There is a single assessed component: a <b>two-hour written, closed-book examination</b>, worth <b>100%</b> of the module mark. The examination is scheduled for <b>Thursday 7 January 2027</b>. The time and the venue are set by the College examination timetable; I will post them on Canvas as soon as they are published.</p>
+<p>Everything examinable is drawn from the lecture slides and the exercise sheets; <b>if a topic appears in neither of those two places, it does not appear in the examination.</b></p>
+<p>It follows that there is no coursework, and hence that the tutorials carry no marks. It is worth stressing, however, that the tutorials are the only scheduled opportunity to identify gaps in your understanding before the examination, and I would encourage you to attend them on that basis.</p>
+<p><b>Format of the paper.</b> The paper covers the whole module, Sessions 1 to 8, and its questions are of the same three kinds as those on the exercise sheets: some ask you to carry out a computation (row reduce a matrix, find an inverse, compute eigenvalues and eigenvectors, fit a line by least squares); some ask you to decide a question and justify the answer (is this set of vectors linearly independent, does this system have a solution for every right-hand side, is this matrix diagonalisable); and some ask you to set up a small engineering problem as a matrix equation before solving it. The marks available for each question, and for each part of a question, are printed on the paper.</p>
+<p><b>Assessment criteria.</b> Marks are awarded for the following, listed in decreasing order of weight.</p>
+<ul>
+  <li><b>Method, clearly set out.</b> A row reduction with every step visible, a definition applied correctly, a theorem named when it is used. The method carries most of the marks for a question; a correct final number with no working carries very few.</li>
+  <li><b>Correct final result.</b> An arithmetic slip is penalised once, where it occurs. If the method is right, the rest of the question is marked on your own numbers, so an early slip does not cost you the whole question.</li>
+  <li><b>Justification.</b> When a question asks whether something is true (is this matrix invertible, is this set linearly independent), a bare yes or no receives no credit. The mark is for the reason: the pivot count, the determinant, the dependence relation you found.</li>
+  <li><b>Precision.</b> Definitions and theorems should be stated as on the slides, in the wording of the textbook. A statement that is false loses marks even when the final answer is right; a statement that is true but irrelevant to the question earns nothing.</li>
+  <li><b>Interpretation.</b> Where a computation answers an engineering question (the currents in a circuit, the long-run size of a population, the stationary distribution of a chain), a sentence saying what the numbers mean is part of the answer.</li>
+</ul>
+<p>In short: show your working, say why, and use the words the module uses. Everything in the list above is exactly what the exercise sheets train, which is one more reason to attempt them before the tutorials rather than after.</p>
+</section>
+
+<section id="reading">
+<h2>8. Reading and materials</h2>
+<p>Textbook: <b>Lay, Lay &amp; McDonald, <i>Linear Algebra and its Applications</i>, 5th edition</b>. The module follows it closely. Each session lists the sections it covers, and individual slides carry a small tag of the form [Lay 1.7] which points you to the exact passage behind the slide you are looking at.</p>
+<p>You are not required to buy it. A copy is held in the library. The interested reader who wants a second treatment of the geometric material may also find Strang’s <i>Introduction to Linear Algebra</i> useful, although it is not assumed anywhere.</p>
+<p>All slides and exercise sheets are made available on <b>Canvas</b>. Canvas, that is, and not Blackboard. You will have each week’s material before the corresponding lecture, although note that until the day of the lecture there may still be changes to the slides.</p>
+</section>
+
+<section id="contact">
+<h2>9. Contact and feedback</h2>
+<p>You can contact us on Teams or by email. Please be mindful, however, that it may take more than one day to receive a reply, particularly if you write outside working hours or at the weekend.</p>
+<p>It is worth saying, finally, that this is the first year in which the module runs in this form, and it is therefore reasonable to assume that some of it will require adjustment. If something is not working for you (the pace, the exercise sheets, the way a particular topic has been presented), please let me know as soon as possible, so I can make the fixes while the module is running.</p>
+</section>
+
+</div></main>
+<footer class="site">Mathematics for Engineering II · Dyson School of Design Engineering, Imperial College London · Module leader: Dr Pietro Ferraro. Slides and exercise sheets are on Canvas.</footer>
+</body>
+</html>
