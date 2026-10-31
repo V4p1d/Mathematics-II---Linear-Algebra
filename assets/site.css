@@ -72,14 +72,22 @@ td.lay { white-space: nowrap; font-variant-numeric: tabular-nums }
 .people dt { font-weight: 700 }
 .people dd { margin: 0; color: var(--muted) }
 
-.sessions { display: grid; gap: 18px; margin-top: 18px }
-.sess { border-top: 3px solid var(--sc); background: var(--surface); border-left: 1px solid var(--line); border-right: 1px solid var(--line);
-  border-bottom: 1px solid var(--line); border-radius: 0 0 6px 6px; padding: 14px 18px 16px; scroll-margin-top: 16px }
-.sess header { display: flex; flex-wrap: wrap; gap: 4px 14px; align-items: baseline }
-.sess .no { font-family: var(--f-code); font-weight: 600; color: var(--sc); font-size: 14px; letter-spacing: .03em }
-.sess h2 { margin: 0; font-size: 21px }
-.sess .meta { font-size: 14px; color: var(--muted) }
-.sess .cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 8px 28px; margin-top: 10px }
+.sessions { display: grid; gap: 0; margin-top: 10px; border-top: 1px solid var(--rule) }
+.sess { border-bottom: 1px solid var(--line); scroll-margin-top: 16px }
+.sess summary { list-style: none; cursor: pointer; display: grid; grid-template-columns: 2.2em minmax(0, 1fr) auto 1.2em; gap: 10px; align-items: baseline; padding: 10px 0 }
+.sess summary::-webkit-details-marker { display: none }
+.sess summary:hover .t { text-decoration: underline }
+.sess summary:focus-visible { outline: 2.5px solid var(--focus); outline-offset: 2px; border-radius: 2px }
+.sess summary .n { font-family: var(--f-code); font-weight: 600; color: var(--sc) }
+.sess summary .t { color: var(--ink) }
+.sess summary .l { font-size: 14px; color: var(--muted); font-variant-numeric: tabular-nums; text-align: right }
+.sess summary::after { content: "+"; font-family: var(--f-code); color: var(--muted); text-align: right; font-size: 17px; line-height: 1 }
+.sess[open] summary::after { content: "\2212" }
+.sess[open] summary { border-bottom: 1px dashed var(--line) }
+.sess[open] summary .t { font-weight: 700 }
+@media (max-width: 560px) { .sess summary { grid-template-columns: 2.2em minmax(0, 1fr) 1.2em } .sess summary .l { grid-column: 2; text-align: left } }
+.sess .cols { display: grid; grid-template-columns: minmax(0, 1.25fr) minmax(0, 1fr); gap: 8px 28px; padding: 6px 0 18px 2.2em }
+@media (max-width: 560px) { .sess .cols { padding-left: 0 } }
 @media (max-width: 760px) { .sess .cols { grid-template-columns: minmax(0, 1fr) } }
 .sess h3 { font-family: var(--f-body); font-size: 12.5px; letter-spacing: .07em; text-transform: uppercase; color: var(--muted); font-weight: 700; margin: 12px 0 6px }
 .topics { display: flex; flex-wrap: wrap; gap: 6px }
